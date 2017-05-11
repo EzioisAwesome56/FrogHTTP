@@ -12,7 +12,7 @@ An HTTPd written in python 2.7, without using any frameworks
  * saving and loading posts (part of the beta forum software)
  
 ### Limitations:
- * none currently known
+ * annoying to store more then just the post contents in the db
 
 ### Todo:
  * Finish built in forum software
