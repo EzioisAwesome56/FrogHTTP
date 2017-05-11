@@ -1,4 +1,4 @@
-#FrogHTTP server version 1
+#FrogHTTP server version 1 (inital version)
 #copyright 2017 DankMemeitTheFrog
 
 #current features:
