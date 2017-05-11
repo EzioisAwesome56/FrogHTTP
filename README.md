@@ -24,3 +24,5 @@ Current version is 1.4
  * sub forums
  * recent activity feed
  * BBcode
+ * make installer (so then it sets up the database and misc settings)
+ * make it load settings for various things
