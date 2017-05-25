@@ -9,10 +9,10 @@ An HTTPd written in python 2.7, without using any frameworks
  * loading pages from external files (ex .html files)
  * unlimited request lenght (limit was 5 charcters for the part before the .py and after the / before 1.4, 1.4 removed it)
  * makesift database setup (uses a folder with subfolders and a crap ton of files)
- * saving and loading posts (part of the beta forum software)
+ * saving and loading posts using JSON
  
 ### Limitations:
- * annoying to store more then just the post contents in the db
+ * None Currently
 
 ### Todo:
  * Finish built in forum software
