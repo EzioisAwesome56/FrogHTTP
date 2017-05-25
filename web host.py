@@ -1,5 +1,5 @@
 #FrogHTTP server version 1.4
-#FrogBoard Forum Software version 0.1
+#FrogBoard Forum Software version 0.4
 #copyright 2017 DankMemeitTheFrog
 
 #import required libs
