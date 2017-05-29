@@ -42,41 +42,43 @@ sock.bind(server_address)
 sock.listen(1)
 
 def handleconn(conn, addr):
-	while True:
-		#accept all the crap the web browser wants to send
-		raw = connection.recv(20000000)
-		#remove the garbage
-		raw2 = raw.split(' HTTP/1.1')[0]
-		data = raw2.split('?id=')[0]
-		print 'received ', data, 'request from client'
-		if data:
-			print 'sending basic HTTP 1.1 OK header'
-			connection.sendall(head)
-			#parse GETs and POSTs
-			if data == 'GET /':
-				print 'sending var html1'
-				connection.send(html1)
-				break
+	try:
+		while True:
+			#accept all the crap the web browser wants to send
+			raw = conn.recv(20000000)
+			#remove the garbage
+			raw2 = raw.split(' HTTP/1.1')[0]
+			data = raw2.split('?id=')[0]
+			print 'received ', data, 'request from client'
+			if data:
+				print 'sending basic HTTP 1.1 OK header'
+				conn.sendall(head)
+				#parse GETs and POSTs
+				if data == 'GET /':
+					print 'sending var html1'
+					conn.send(html1)
+					break
+				else:
+					print 'client requested a page that doesnt exist'
+					print 'sending 404 page instead'
+					conn.sendall(notfound)
+					break
 			else:
-				print 'client requested a page that doesnt exist'
-				print 'sending 404 page instead'
-				connection.sendall(notfound)
+				print >>sys.stderr, 'no more data from', addr
 				break
-		else:
-			print >>sys.stderr, 'no more data from', client_address
-			break
+	finally:
+		try:
+			conn.close()
+		except: # already closed?
+			pass
 
 def main():
 	while True:
 		# Wait for a connection
-		print >>sys.stderr, 'waiting for a connection'
+		print >>sys.stderr, 'waiting for another connection'
 		connection, client_address = sock.accept()
-		try:
-			print >>sys.stderr, 'connection from', client_address
-      	      		thread.start_new_thread(handleconn, (connection, client_address))
-		finally:
-			# Clean up the connection
-			connection.close()
+		print >>sys.stderr, 'connection from', client_address
+      	      	thread.start_new_thread(handleconn, (connection, client_address))
 	sock.close()
 
 if __name__ == "__main__":
